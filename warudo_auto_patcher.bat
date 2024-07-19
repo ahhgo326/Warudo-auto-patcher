@@ -55,9 +55,9 @@ goto :main
 
 :main
 if "%lang%"=="en" (
-    echo The following Warudo scene and avatar files will be copied:
+    echo The following Warudo files will be copied:
 ) else (
-    echo 다음 와루도 씬, 아바타 파일을 복사합니다:
+    echo 다음 와루도 파일을 복사합니다:
 )
 
 for %%F in ("%~dp0*.json") do (
