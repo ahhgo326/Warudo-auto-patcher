@@ -14,8 +14,8 @@
 3. 화면의 지시에 따라 진행합니다.
 
 ## TODO
-- 스크립트 내부 안내문 영어 지원
-- 아바타, 프롭 구분 로직 개선
+- 스크립트 내부 안내문 영어 지원 ✅
+- 아바타, 프롭 구분 로직 개선 ⏸️
 
 ## 지원 파일 형식
 - 씬: .json, .png
@@ -52,8 +52,8 @@ This batch script is a tool that automatically copies Warudo-related files to th
 3. Follow the on-screen instructions.
 
 ## TODO
-- Add English support for in-script instructions
-- Improve avatar and prop distinction logic
+- Add English support for in-script instructions ✅
+- Improve avatar and prop distinction logic ⏸️
 
 ## Supported File Formats
 - Scenes: .json, .png
