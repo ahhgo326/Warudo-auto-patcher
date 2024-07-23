@@ -136,6 +136,16 @@ if "%lang%"=="en" (
 )
 timeout /t 1 /nobreak >nul
 set "warudo_path="
+if exist "C:\Program Files (x86)\Steam\steamapps\common\Warudo\Warudo_Data\StreamingAssets" (
+    set "warudo_path=C:\Program Files (x86)\Steam\steamapps\common\Warudo\Warudo_Data\StreamingAssets"
+    if "%lang%"=="en" (
+        echo Found Warudo installation path: !warudo_path!
+    ) else (
+        echo Warudo 설치 경로를 찾았습니다: !warudo_path!
+    )
+    goto :found
+)
+
 for %%d in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
     if exist "%%d:\SteamLibrary\steamapps\common\Warudo\Warudo_Data\StreamingAssets" (
         set "warudo_path=%%d:\SteamLibrary\steamapps\common\Warudo\Warudo_Data\StreamingAssets"
