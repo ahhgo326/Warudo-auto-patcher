@@ -135,36 +135,36 @@ if "%lang%"=="en" (
     echo Warudo 설치 경로를 찾는 중...
 )
 timeout /t 1 /nobreak >nul
-set "warudo_path="
-if exist "C:\Program Files (x86)\Steam\steamapps\common\Warudo\Warudo_Data\StreamingAssets" (
-    set "warudo_path=C:\Program Files (x86)\Steam\steamapps\common\Warudo\Warudo_Data\StreamingAssets"
-    if "%lang%"=="en" (
-        echo Found Warudo installation path: !warudo_path!
-    ) else (
-        echo Warudo 설치 경로를 찾았습니다: !warudo_path!
-    )
-    goto :found
-)
 
+set "warudo_path="
+
+:: Steam 기본 설치 경로와 SteamLibrary 경로 확인
 for %%d in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
+    if exist "%%d:\Program Files (x86)\Steam\steamapps\common\Warudo\Warudo_Data\StreamingAssets" (
+        set "warudo_path=%%d:\Program Files (x86)\Steam\steamapps\common\Warudo\Warudo_Data\StreamingAssets"
+        goto :found_path
+    )
     if exist "%%d:\SteamLibrary\steamapps\common\Warudo\Warudo_Data\StreamingAssets" (
         set "warudo_path=%%d:\SteamLibrary\steamapps\common\Warudo\Warudo_Data\StreamingAssets"
-        if "%lang%"=="en" (
-            echo Found Warudo installation path: !warudo_path!
-        ) else (
-            echo Warudo 설치 경로를 찾았습니다: !warudo_path!
-        )
-        goto :found
+        goto :found_path
     )
 )
 
-:not_found
-if "%lang%"=="en" (
-    echo Unable to find Warudo installation path.
-) else (
-    echo Warudo 설치 경로를 찾을 수 없습니다.
+if not defined warudo_path (
+    if "%lang%"=="en" (
+        echo Unable to find Warudo installation path.
+    ) else (
+        echo Warudo 설치 경로를 찾을 수 없습니다.
+    )
+    goto :end
 )
-goto :end
+
+:found_path
+if "%lang%"=="en" (
+    echo Found Warudo installation path: !warudo_path!
+) else (
+    echo Warudo 설치 경로를 찾았습니다: !warudo_path!
+)
 
 :found
 if not exist "!warudo_path!\Scenes" mkdir "!warudo_path!\Scenes"
