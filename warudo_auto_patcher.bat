@@ -40,7 +40,7 @@ set "lang=en"
 echo.
 echo Starting Warudo Scene and Avatar Auto-Install Script
 echo Created by: Artmug 0326
-echo Build: 2024-07-23
+echo Build: 2024-07-25
 echo.
 goto :main
 
@@ -49,7 +49,7 @@ set "lang=ko"
 echo.
 echo 와루도 씬, 아바타 자동 설치 스크립트를 시작합니다.
 echo 제작: 아트머그 0326 작가
-echo 빌드: 2024-07-23
+echo 빌드: 2024-07-25
 echo.
 goto :main
 
