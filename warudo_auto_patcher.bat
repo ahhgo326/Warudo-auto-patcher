@@ -38,18 +38,18 @@ if errorlevel 1 goto :english
 :english
 set "lang=en"
 echo.
-echo Starting Warudo Scene and Avatar Auto-Install Script
+echo Starting Warudo Scene, Avatar, and Plugin Auto-Install Script
 echo Created by: Artmug 0326
-echo Build: 2024-07-25
+echo Build: 2024-08-13
 echo.
 goto :main
 
 :korean
 set "lang=ko"
 echo.
-echo 와루도 씬, 아바타 자동 설치 스크립트를 시작합니다.
+echo 와루도 씬, 아바타, 플러그인 자동 설치 스크립트를 시작합니다.
 echo 제작: 아트머그 0326 작가
-echo 빌드: 2024-07-25
+echo 빌드: 2024-08-13
 echo.
 goto :main
 
@@ -108,15 +108,23 @@ for %%F in ("%~dp0*.vmd") do (
         echo    - MMD 파일: %%~nxF
     )
 )
+
+for %%F in ("%~dp0*.cs") do (
+    if "%lang%"=="en" (
+        echo    - Plugin file: %%~nxF
+    ) else (
+        echo    - 플러그인 파일: %%~nxF
+    )
+)
 echo.
 
-if not exist "%~dp0*.json" if not exist "%~dp0*.png" if not exist "%~dp0*.warudo" if not exist "%~dp0*.wav" if not exist "%~dp0*.vmd" (
+if not exist "%~dp0*.json" if not exist "%~dp0*.png" if not exist "%~dp0*.warudo" if not exist "%~dp0*.wav" if not exist "%~dp0*.vmd" if not exist "%~dp0*.cs" (
     if "%lang%"=="en" (
-        echo Warning: No scene, avatar, music, or MMD files found in the current directory.
-        echo Please make sure JSON, PNG, Warudo, WAV, and VMD files are in the same folder as this script.
+        echo Warning: No scene, avatar, music, MMD, or plugin files found in the current directory.
+        echo Please make sure JSON, PNG, Warudo, WAV, VMD, and CS files are in the same folder as this script.
     ) else (
-        echo 경고: 현재 디렉토리에서 씬, 아바타, 음악, MMD 파일을 찾을 수 없습니다.
-        echo 스크립트 파일과 같은 폴더에 JSON, PNG, Warudo, WAV, VMD 파일이 있는지 확인해주세요.
+        echo 경고: 현재 디렉토리에서 씬, 아바타, 음악, MMD, 플러그인 파일을 찾을 수 없습니다.
+        echo 스크립트 파일과 같은 폴더에 JSON, PNG, Warudo, WAV, VMD, CS 파일이 있는지 확인해주세요.
     )
     goto :end
 )
@@ -172,6 +180,7 @@ if not exist "!warudo_path!\Characters" mkdir "!warudo_path!\Characters"
 if not exist "!warudo_path!\Props" mkdir "!warudo_path!\Props"
 if not exist "!warudo_path!\Music" mkdir "!warudo_path!\Music"
 if not exist "!warudo_path!\MMD" mkdir "!warudo_path!\MMD"
+if not exist "!warudo_path!\Playground" mkdir "!warudo_path!\Playground"
 
 set "error_occurred=false"
 
@@ -202,6 +211,11 @@ for %%F in ("%~dp0*.wav") do (
 
 for %%F in ("%~dp0*.vmd") do (
     call :copy_file "%%~F" "!warudo_path!\MMD\%%~nxF"
+    if !errorlevel! neq 0 set "error_occurred=true"
+)
+
+for %%F in ("%~dp0*.cs") do (
+    call :copy_file "%%~F" "!warudo_path!\Playground\%%~nxF"
     if !errorlevel! neq 0 set "error_occurred=true"
 )
 
@@ -271,6 +285,7 @@ for %%F in ("%~dp0*.warudo") do (
 )
 for %%F in ("%~dp0*.wav") do if exist "!warudo_path!\Music\%%~nxF" del "!warudo_path!\Music\%%~nxF"
 for %%F in ("%~dp0*.vmd") do if exist "!warudo_path!\MMD\%%~nxF" del "!warudo_path!\MMD\%%~nxF"
+for %%F in ("%~dp0*.cs") do if exist "!warudo_path!\Playground\%%~nxF" del "!warudo_path!\Playground\%%~nxF"
 
 :end
 echo.
